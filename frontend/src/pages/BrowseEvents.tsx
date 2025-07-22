@@ -73,8 +73,8 @@ const BrowseEvents: React.FC = () => {
             {/* Header */}
             <header className="flex items-center justify-between p-4 md:px-8 bg-white shadow-sm">
                 <div className="flex items-baseline gap-1">
-                    <h1 className="text-2xl font-bold text-gray-900">Event</h1>
-                    <span className="text-2xl font-bold text-purple-700">Hive</span>
+                    <h1 className="text-3xl font-bold text-gray-900">Event</h1>
+                    <span className="text-3xl font-bold text-purple-700">Hive</span>
                 </div>
                 <nav className="flex items-center gap-4">
                     <button className="px-4 py-2 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">Login</button>
@@ -109,7 +109,7 @@ const BrowseEvents: React.FC = () => {
                 </button>
 
                 {/* Main Filter Bar - positioned over the hero */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-[90%] max-w-4xl bg-purple-900 p-6 rounded-lg shadow-lg flex flex-col md:flex-row gap-4 items-center justify-center">
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-[90%] max-w-4xl  bg-[#10107B] p-6 rounded-lg shadow-lg flex flex-col md:flex-row gap-4 items-center justify-center">
                     <div className="flex flex-col w-full">
                         <label htmlFor="looking-for" className="text-sm text-gray-300 mb-1">
                             Looking For
@@ -119,7 +119,7 @@ const BrowseEvents: React.FC = () => {
                                 id="looking-for"
                                 value={lookingForFilter}
                                 onChange={(e) => setLookingForFilter(e.target.value)}
-                                className="w-full bg-purple-800 text-white border border-purple-700 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="w-full bg-gray-200 text-[#10107B] border border-gray-200 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                             >
                                 <option value="all">Choose event type</option>
                                 <option value="free">Free</option>
@@ -137,7 +137,7 @@ const BrowseEvents: React.FC = () => {
                                 id="location"
                                 value={locationFilter}
                                 onChange={(e) => setLocationFilter(e.target.value)}
-                                className="w-full bg-purple-800 text-white border border-purple-700 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="w-full bg-gray-200 text-[#10107B] border border-gray-200 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-gray-500  focus:border-transparent"
                             >
                                 <option value="all">Choose location</option>
                                 <option value="new-york">New York</option>
@@ -156,7 +156,7 @@ const BrowseEvents: React.FC = () => {
                                 id="when"
                                 value={whenFilter}
                                 onChange={(e) => setWhenFilter(e.target.value)}
-                                className="w-full bg-purple-800 text-white border border-purple-700 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                className="w-full bg-gray-200 text-[#10107B] border border-gray-200 rounded-md py-2 pl-3 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-gray-500  focus:border-transparent"
                             >
                                 <option value="all">Choose date and time</option>
                                 <option value="today">Today</option>

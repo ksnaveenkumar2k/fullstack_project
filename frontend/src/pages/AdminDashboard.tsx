@@ -69,6 +69,12 @@ const AdminDashboard: React.FC = () => {
         navigate("/admin/create-event")
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("token") // Clear the JWT token
+        navigate("/login") // Redirect to the login page
+    }
+
+
     return (
         <div className="min-h-screen bg-gray-50 p-6 md:p-8 lg:p-10">
             {/* Header Section */}
@@ -85,6 +91,12 @@ const AdminDashboard: React.FC = () => {
                 >
                     <PlusCircle className="h-5 w-5" />
                     Create Event
+                </button>
+                <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-md shadow-md hover:bg-red-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-red-300"
+                >
+                    Logout
                 </button>
             </div>
             {/* Hero Section */}
@@ -146,8 +158,8 @@ const AdminDashboard: React.FC = () => {
                                             />
                                             <span
                                                 className={`absolute top-2 left-2 text-xs font-semibold px-2 py-1 rounded-full ${event.cost_type.toLowerCase() === "free"
-                                                        ? "bg-green-500 text-white"
-                                                        : "bg-yellow-500 text-white"
+                                                    ? "bg-green-500 text-white"
+                                                    : "bg-yellow-500 text-white"
                                                     }`}
                                             >
                                                 {event.cost_type.toUpperCase()}

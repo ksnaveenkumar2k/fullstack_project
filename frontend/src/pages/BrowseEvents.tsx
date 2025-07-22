@@ -78,10 +78,25 @@ const BrowseEvents: React.FC = () => {
                 </div>
                 <nav className="flex items-center gap-4">
                     <button className="px-4 py-2 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">Login</button>
-                    <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors shadow-md">
+                    <button className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-800 transition-colors shadow-md">
                         Signup
                     </button>
+                    <button
+                        className="px-4 py-2 bg-purple-600 text-white  rounded-md hover:bg-purple-800 transition-colors"
+                        onClick={() => {
+                            // Clear all cookies
+                            document.cookie.split(";").forEach(cookie => {
+                                const [cookieName] = cookie.trim().split("=");
+                                document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                            });
+                            // Redirect to login page
+                            window.location.href = "/user/login";
+                        }}
+                    >
+                        Logout
+                    </button>
                 </nav>
+
             </header>
 
             {/* Hero Section */}

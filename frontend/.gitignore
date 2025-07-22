@@ -1,0 +1,64 @@
+# === Python / Django ===
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.db
+*.sqlite3
+*.log
+
+# Django specific
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+*.mo
+*.migrations/
+
+# === Environment / Secrets ===
+.env
+.env.*
+*.local
+
+# === Node / React ===
+node_modules/
+dist/
+dist-ssr/
+.vite/
+.cache/
+
+# === Log files ===
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# === Editor and OS junk ===
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# === Test / Lint / Coverage ===
+coverage/
+*.cover
+*.lcov
+.nyc_output/
+.eslintcache
+.stylelintcache
+
+# === TypeScript ===
+*.tsbuildinfo

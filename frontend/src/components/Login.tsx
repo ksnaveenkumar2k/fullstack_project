@@ -1,103 +1,4 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-// import AdminImg from '../assets/unsplash_EVgsAbL51Rk.png';
 
-// const Login: React.FC = () => {
-//     const navigate = useNavigate();
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [error, setError] = useState('');
-//     const [success, setSuccess] = useState('');
-
-//     const handleSubmit = async (e: React.FormEvent) => {
-//         e.preventDefault();
-//         setError('');
-//         setSuccess('');
-
-//         if (!email.match(/^\S+@\S+\.\S+$/)) {
-//             setError('Invalid email format.');
-//             return;
-//         }
-
-//         if (password.length < 6) {
-//             setError('Password must be at least 6 characters.');
-//             return;
-//         }
-
-//         try {
-//             const res = await axios.post('http://localhost:8000/api/login/', { email, password });
-//             localStorage.setItem('token', res.data.token);
-//             setSuccess('Login successful! Redirecting...');
-//             setTimeout(() => navigate('/admin/create-event'), 1000);
-//         } catch (err: any) {
-//             setError(err.response?.data?.detail || 'Login failed.');
-//         }
-//     };
-
-//     return (
-//         <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-//             <div className="flex w-full max-w-5xl h-[700px] shadow-lg rounded-lg overflow-hidden">
-//                 <div className="w-1/2 bg-white p-8 flex flex-col justify-center">
-//                     <div className="text-center mb-8">
-//                         <h1 className="text-black font-bold mb-2 text-lg">Event <span className='text-lg text-purple-500'>Hive</span></h1>
-//                         <h2 className="text-2xl font-bold">Sign In to Event Hive</h2>
-//                     </div>
-//                     {error && <div className="text-red-500 mb-4">{error}</div>}
-//                     {success && <div className="text-green-500 mb-4">{success}</div>}
-//                     <form onSubmit={handleSubmit} className="max-w-md mx-auto w-full">
-//                         <div className="mb-6">
-//                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-//                                 YOUR EMAIL
-//                             </label>
-//                             <input
-//                                 id="email"
-//                                 type="email"
-//                                 placeholder="Enter your email"
-//                                 value={email}
-//                                 onChange={(e) => setEmail(e.target.value)}
-//                                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-purple-500"
-//                                 required
-//                             />
-//                         </div>
-//                         <div className="mb-8">
-//                             <div className="flex justify-between items-center">
-//                                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-//                                     PASSWORD
-//                                 </label>
-//                                 <a href="#" className="text-sm text-gray-500">Forgot your password?</a>
-//                             </div>
-//                             <input
-//                                 id="password"
-//                                 type="password"
-//                                 placeholder="Enter your password"
-//                                 value={password}
-//                                 onChange={(e) => setPassword(e.target.value)}
-//                                 className="w-full p-3 border-b border-gray-300 focus:outline-none focus:border-purple-500"
-//                                 required
-//                             />
-//                         </div>
-//                         <button
-//                             type="submit"
-//                             className="w-full bg-purple-500 text-white py-3 rounded-lg hover:bg-purple-600 transition duration-200"
-//                         >
-//                             Sign In
-//                         </button>
-//                     </form>
-
-//                 </div>
-                // <div
-                //     className="w-1/2 bg-cover bg-center"
-                //     style={{ backgroundImage: `url(${AdminImg})` }}
-                // >
-//                     {/* Background image applied here */}
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Login;
 "use client"
 
 import type React from "react"
@@ -148,7 +49,7 @@ const AdminLogin: React.FC = () => {
       const data = await res.json()
       localStorage.setItem("token", data.token)
       setSuccess("Login successful! Redirecting...")
-      setTimeout(() => navigate("/admin/create-event"), 1000)
+      setTimeout(() => navigate("/admin/dashboard"), 1000)
     } catch (err: any) {
       setError(err.message || "Login failed.")
     }
@@ -160,7 +61,7 @@ const AdminLogin: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="flex w-full max-w-5xl h-[700px] shadow-lg rounded-lg overflow-hidden">
+      <div className="flex w-full min-h-[700px] shadow-lg rounded-lg overflow-hidden"> {/* Ensures full width */}
         {/* Left Panel - Login Form */}
         <div className="w-1/2 bg-white p-8 flex flex-col justify-center">
           <div className="text-center mb-8">
@@ -240,7 +141,7 @@ const AdminLogin: React.FC = () => {
         {/* Right Panel - Image and Hello Friend */}
         <div
           className="w-1/2 bg-cover bg-center relative hidden lg:flex items-center justify-center"
-            style={{ backgroundImage: `url(${AdminImg})` }}
+          style={{ backgroundImage: `url(${AdminImg})` }}
         >
           <div className="absolute inset-0 bg-black opacity-50" /> {/* Overlay for brightness */}
           <div className="relative z-10 text-white text-center p-8">

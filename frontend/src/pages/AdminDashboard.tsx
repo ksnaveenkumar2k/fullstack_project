@@ -1,13 +1,13 @@
-
 "use client"
 
 import type React from "react"
 import { useEffect, useState } from "react"
-import { CalendarDays, Clock, MapPin, Info } from "lucide-react"
-import fullimg from "../assets/Large_Full Image.png"
+import { CalendarDays, Clock, MapPin, Info, PlusCircle } from "lucide-react" // Added PlusCircle icon
+import { useNavigate } from "react-router-dom" // Import useNavigate
+import fullimg from "../../src/assets/Large_Full Image.png" // Preserved original image import
 
 interface Event {
-    _id: string
+    _id: string // Changed id to _id to match backend response in BrowseEvents
     title: string
     venue: string
     start_date: string
@@ -20,6 +20,7 @@ interface Event {
 }
 
 const AdminDashboard: React.FC = () => {
+    const navigate = useNavigate() // Initialize useNavigate
     const [events, setEvents] = useState<Event[]>([])
     const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(true)
@@ -33,21 +34,26 @@ const AdminDashboard: React.FC = () => {
                 if (!token) {
                     setError("Unauthorized: Please login.")
                     setIsLoading(false)
+                    navigate("/login") // Redirect to login if no token
                     return
                 }
-
                 const res = await fetch("http://localhost:8000/api/admin/dashboard/", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                 })
-
                 if (!res.ok) {
                     const errorData = await res.json()
-                    throw new Error(errorData.detail || "Failed to fetch events.")
+                    // If the error is due to unauthorized access (e.g., 401 status)
+                    if (res.status === 401) {
+                        setError("Session expired or unauthorized. Please login again.")
+                        localStorage.removeItem("token") // Clear invalid token
+                        navigate("/login") // Redirect to login
+                    } else {
+                        throw new Error(errorData.detail || "Failed to fetch events.")
+                    }
                 }
-
                 const data = await res.json()
                 setEvents(data.events)
             } catch (err: any) {
@@ -57,16 +63,30 @@ const AdminDashboard: React.FC = () => {
             }
         }
         fetchEvents()
-    }, [])
+    }, [navigate]) // Add navigate to dependency array
+
+    const handleCreateEventClick = () => {
+        navigate("/admin/create-event")
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 p-6 md:p-8 lg:p-10">
             {/* Header Section */}
-            <div className="mx-auto max-w-6xl mb-8 flex items-baseline gap-2">
-                <h1 className="text-4xl font-bold text-gray-900">Event</h1>
-                <span className="text-4xl font-bold text-purple-700">Hive</span>
+            <div className="mx-auto max-w-6xl mb-8 flex items-center justify-between">
+                {" "}
+                {/* Added justify-between */}
+                <div className="flex items-baseline gap-2">
+                    <h1 className="text-4xl font-bold text-gray-900">Event</h1>
+                    <span className="text-4xl font-bold text-purple-700">Hive</span>
+                </div>
+                <button
+                    onClick={handleCreateEventClick}
+                    className="flex items-center gap-2 px-6 py-3 bg-purple-600 text-white font-semibold rounded-md shadow-md hover:bg-purple-700 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-purple-300"
+                >
+                    <PlusCircle className="h-5 w-5" />
+                    Create Event
+                </button>
             </div>
-
             {/* Hero Section */}
             <div className="mx-auto max-w-6xl mb-10 relative bg-[#6A0DAD] rounded-lg overflow-hidden shadow-lg h-[350px] flex items-center p-8">
                 <img
@@ -74,9 +94,7 @@ const AdminDashboard: React.FC = () => {
                     alt="Event illustration"
                     className="absolute inset-0 w-full h-full object-cover object-right-bottom opacity-80"
                 />
-
             </div>
-
             {/* Error Message */}
             {error && (
                 <div className="mx-auto max-w-6xl mb-6 p-4 rounded-lg border border-red-400 bg-red-50 text-red-700 flex items-start gap-2">
@@ -87,10 +105,8 @@ const AdminDashboard: React.FC = () => {
                     </div>
                 </div>
             )}
-
             {/* Listed Events Section */}
             <h2 className="text-2xl font-bold text-gray-900 mb-6 mx-auto max-w-6xl">Listed Events</h2>
-
             {/* Loading State */}
             {isLoading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-6xl">
